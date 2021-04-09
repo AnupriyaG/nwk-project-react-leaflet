@@ -8,18 +8,22 @@ export function slugify(str) {
 
 export const markers = [
   {
-    name: 'Martin Luther King Jr Blvd',
-    latlng: [40.743503, -74.175850]
+    name: 'Hudson_Warren',
+    latlng: [40.74361875485853, -74.18627415983981]
   }, {
-    name: 'Lock St',
-    latlng: [40.744721, -74.179820]
+    name: 'Ferry_Adams',
+    latlng: [40.72934018348578, -74.158676075992]
+  },
+  {
+    name: 'WestMarket_Warren',
+    latlng: [40.74403808506137, -74.18759444943998]
   }
 ];
 
 
 
 export const mapConfig = {
-  center: [40.7357, 74.1724],
+  center: [40.7357, -74.1724],
   zoom: 8
 };
 var points = turf.randomPoint(50000, { bbox: [13.0535, 52.3303, 13.7262, 52.6675]})
