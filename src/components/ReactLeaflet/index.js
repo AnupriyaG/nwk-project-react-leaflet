@@ -2,6 +2,12 @@ import React, { PureComponent } from 'react';
 import Leaflet, { icon } from 'leaflet';
 import { create } from 'apisauce';
 
+//importing Bootstrap components
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Table from 'react-bootstrap/Table';
+
 import { MapContainer, Marker, Popup, TileLayer, GeoJSON } from 'react-leaflet';
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import { markers, mapConfig,iconPerson } from '../../helper/utils';
@@ -18,9 +24,9 @@ const data = {
     {
       type: "Feature",
       id: "01",
-      properties: { name: "Alabama", density: 94.65 },
+      properties: { name: "Newark", density: 94.65 },
       geometry: {
-        type: "Point",
+        type: "point",
         coordinates: 
             [-87.359296, 35.00118]
         
@@ -106,7 +112,7 @@ class ReactLeafletMap extends PureComponent {
     const LeafletMarkers = markers.map(marker => (
       <Marker position={marker.latlng}>
         <Popup>
-          
+          {marker.name}
         </Popup>
       </Marker>
     ));
@@ -120,7 +126,11 @@ class ReactLeafletMap extends PureComponent {
       return <div>Loading...</div>;
     } else {*/
 
-    return (
+/*
+
+ */
+
+   /* return (
       <div className="map">
         <MapContainer style={{ height: "100vh" }} center={mapConfig.center} zoom={mapConfig.zoom} className="map__reactleaflet">
           <TileLayer
@@ -132,11 +142,52 @@ class ReactLeafletMap extends PureComponent {
           <MarkerClusterGroup>
           
         </MarkerClusterGroup>
-          {/* You can now try to find Alabama on a Map to see how it looks like now with GeoJSON*/}
           <GeoJSON data={data} style={this.getStyle} />
         </MapContainer>
       </div>
-    );
+    );*/
+
+    return(       
+        <Container fluid>
+        <Row>
+          <Col>
+            <MapContainer style={{ height: "100vh",width: "100%"}} center={mapConfig.center} zoom={mapConfig.zoom} className="map__reactleaflet">
+              <TileLayer
+                url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
+              />
+              {LeafletMarkers}
+          
+              <MarkerClusterGroup>
+            
+              </MarkerClusterGroup>
+            {/* <GeoJSON data={data} style={this.getStyle} /> */}
+            </MapContainer>
+          </Col>
+          <Col>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Location</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {markers.map((marker,index) => (
+                    <tr position={marker.latlng}>
+                      <td>{index}</td>
+                      <td>{marker.name}</td>
+                      <td>N/A</td>
+                  </tr>
+                ))}
+                </tbody>
+            </Table>
+          </Col>
+        </Row>
+      </Container>
+      
+      );
   //}
 }
 }
