@@ -13,13 +13,20 @@ import './styles/main.styl';
 
 function App() {
   return (
-    <BrowserRouter basename={process.env.BASENAME}>
+    <BrowserRouter basename={process.env.REACT_APP_ROUTER_BASE || ''}>
+      <div className="app">
+        <Header />
+        <Route exact path="/" component={Home} />
+        <Route path="/react-leaflet" component={ReactLeafletMap} />
+      </div>
+    </BrowserRouter>
+   /* <BrowserRouter basename={process.env.BASENAME}>
     <div className="app">
       <Header />
       <Route exact path="/" component={Home} />
       <Route path="/react-leaflet" component={ReactLeafletMap} />
     </div>
-  </BrowserRouter>
+  </BrowserRouter>*/
   );
 }
 
